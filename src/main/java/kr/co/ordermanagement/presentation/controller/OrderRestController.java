@@ -4,9 +4,7 @@ import kr.co.ordermanagement.application.SimpleOrderService;
 import kr.co.ordermanagement.presentation.dto.OrderProductRequestDto;
 import kr.co.ordermanagement.presentation.dto.OrderResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,18 @@ public class OrderRestController {
         OrderResponseDto orderResponseDto = simpleOrderService.createOrder(orderProductRequestDtos);
         return ResponseEntity.ok(orderResponseDto);
 
+    }
+
+    @GetMapping("/orders/{orderId}")
+    public ResponseEntity<OrderResponseDto> getOrderById(@PathVariable Long orderId) {
+        OrderResponseDto orderResponseDto = simpleOrderService.findById(orderId);
+        return ResponseEntity.ok(orderResponseDto);
+    }
+
+    @PatchMapping("/orders/{orderId}")
+    public ResponseEntity<OrderResponseDto> changeOrderState(@PathVariable Long orderId,
+                                                             @RequestBody ChangeStateRequestDto changeStateRequestDto) {
+        OrderResponseDto orderResponseDto = simpleOrderService.changeState(orderId, changeStateRequestDto);
+        return ResponseEntity.ok(orderResponseDto);
     }
 }

@@ -25,4 +25,12 @@ public class Order {
                 .mapToInt(orderedProduct -> orderedProduct.getPrice() * orderedProduct.getAmount())
                 .sum();
     }
+
+    public boolean sameId(Long orderId) {
+        return this.id.equals(orderId);
+    }
+
+    public void changeStateForce(String state) {
+        this.state = state;
+    }
 }
