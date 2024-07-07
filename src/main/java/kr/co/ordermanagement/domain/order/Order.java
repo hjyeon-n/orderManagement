@@ -1,5 +1,6 @@
 package kr.co.ordermanagement.domain.order;
 
+import kr.co.ordermanagement.domain.exception.CanNotCancelableStateException;
 import kr.co.ordermanagement.domain.product.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +41,7 @@ public class Order {
 
     public void cancel() {
         if (!this.state.equals("CREATED")) {
-            throw new RuntimeException("이미 취소되었거나 취소할 수 없는 주문 상태입니다.");
+            throw new CanNotCancelableStateException("이미 취소되었거나 취소할 수 없는 주문 상태입니다.");
         }
 
         this.state = "CANCELED";

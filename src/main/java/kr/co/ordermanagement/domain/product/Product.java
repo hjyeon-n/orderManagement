@@ -1,5 +1,6 @@
 package kr.co.ordermanagement.domain.product;
 
+import kr.co.ordermanagement.domain.exception.NotEnoughAmountExeption;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -39,7 +40,7 @@ public class Product {
 
     public void checkEnoughAmount(Integer orderedAmount) {
         if (this.amount < orderedAmount) {
-            throw new RuntimeException(this.id + "번 상품의 수량이 부족합니다");
+            throw new NotEnoughAmountExeption(this.id + "번 상품의 수량이 부족합니다");
         }
     }
 
