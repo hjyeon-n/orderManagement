@@ -37,4 +37,10 @@ public class OrderRestController {
         OrderResponseDto orderResponseDto = simpleOrderService.changeState(orderId, changeStateRequestDto);
         return ResponseEntity.ok(orderResponseDto);
     }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<OrderResponseDto>> getOrderByState(@RequestParam String state) {
+        List<OrderResponseDto> orderResponseDtos = simpleOrderService.findByState(state);
+        return ResponseEntity.ok(orderResponseDtos);
+    }
 }
