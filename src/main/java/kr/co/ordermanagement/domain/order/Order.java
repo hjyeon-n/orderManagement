@@ -13,12 +13,12 @@ public class Order {
     private Long id;
     private List<Product> orderedProducts;
     private Integer totalPrice;
-    private String state;
+    private State state;
 
     public Order(List<Product> orderedProducts) {
         this.orderedProducts = orderedProducts;
         this.totalPrice = calculateTotalPrice(orderedProducts);
-        this.state = "CREATED";
+        this.state = State.CREATED;
     }
 
     private Integer calculateTotalPrice(List<Product> orderedProducts) {
@@ -31,19 +31,16 @@ public class Order {
         return this.id.equals(orderId);
     }
 
-    public void changeStateForce(String state) {
+    public void changeStateForce(State state) {
         this.state = state;
     }
 
-    public boolean sameState(String state) {
+    public boolean sameState(State state) {
         return this.state.equals(state);
     }
 
     public void cancel() {
-        if (!this.state.equals("CREATED")) {
-            throw new CanNotCancelableStateException("이미 취소되었거나 취소할 수 없는 주문 상태입니다.");
-        }
-
-        this.state = "CANCELED";
+        this.state.checkCancelable();
+        this.state = State.CANCELED;
     }
 }
