@@ -43,4 +43,10 @@ public class OrderRestController {
         List<OrderResponseDto> orderResponseDtos = simpleOrderService.findByState(state);
         return ResponseEntity.ok(orderResponseDtos);
     }
+
+    @PatchMapping("orders/{orderId}/cancel")
+    public ResponseEntity<OrderResponseDto> cancelOrderById(@PathVariable Long orderId) {
+        OrderResponseDto orderResponseDto = simpleOrderService.cancelOrderById(orderId);
+        return ResponseEntity.ok(orderResponseDto);
+    }
 }

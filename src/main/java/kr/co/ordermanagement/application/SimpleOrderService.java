@@ -94,4 +94,13 @@ public class SimpleOrderService {
 
         return orderResponseDtos;
     }
+
+    public OrderResponseDto cancelOrderById(Long orderId) {
+        Order order = orderRepository.findById(orderId);
+
+        order.cancel();
+
+        OrderResponseDto orderResponseDto = OrderResponseDto.toDto(order);
+        return orderResponseDto;
+    }
 }
