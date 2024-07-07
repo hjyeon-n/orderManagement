@@ -11,21 +11,21 @@ import java.util.List;
 @Getter
 public class OrderResponseDto {
     private Long id;
-    private List<ProductDto> orderedProduct;
+    private List<OrderedProductDto> orderedProducts;
     private Integer totalPrice;
     private State state;
 
-    public OrderResponseDto(Long id, List<ProductDto> orderedProduct, Integer totalPrice, State state) {
+    public OrderResponseDto(Long id, List<OrderedProductDto> orderedProducts, Integer totalPrice, State state) {
         this.id = id;
-        this.orderedProduct = orderedProduct;
+        this.orderedProducts = orderedProducts;
         this.totalPrice = totalPrice;
         this.state = state;
     }
 
     public static OrderResponseDto toDto(Order order) {
-        List<ProductDto> orderedProductDtos = order.getOrderedProducts()
+        List<OrderedProductDto> orderedProductDtos = order.getOrderedProducts()
                 .stream()
-                .map(orderProduct -> ProductDto.toDto(orderProduct))
+                .map(orderProduct -> OrderedProductDto.toDto(orderProduct))
                 .toList();
 
         OrderResponseDto orderResponseDto = new OrderResponseDto(

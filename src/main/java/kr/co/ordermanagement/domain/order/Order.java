@@ -11,17 +11,17 @@ import java.util.List;
 public class Order {
     @Setter
     private Long id;
-    private List<Product> orderedProducts;
+    private List<OrderedProduct> orderedProducts;
     private Integer totalPrice;
     private State state;
 
-    public Order(List<Product> orderedProducts) {
+    public Order(List<OrderedProduct> orderedProducts) {
         this.orderedProducts = orderedProducts;
         this.totalPrice = calculateTotalPrice(orderedProducts);
         this.state = State.CREATED;
     }
 
-    private Integer calculateTotalPrice(List<Product> orderedProducts) {
+    private Integer calculateTotalPrice(List<OrderedProduct> orderedProducts) {
         return orderedProducts.stream()
                 .mapToInt(orderedProduct -> orderedProduct.getPrice() * orderedProduct.getAmount())
                 .sum();
